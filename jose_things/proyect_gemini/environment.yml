@@ -1,0 +1,17 @@
+name: quora_test_env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pandas
+  - scikit-learn
+  - scipy
+  - numpy
+  - joblib
+  - ipykernel
+  - matplotlib
+  - pip
+  - pip:
+    - sentence-transformers
+    - torch

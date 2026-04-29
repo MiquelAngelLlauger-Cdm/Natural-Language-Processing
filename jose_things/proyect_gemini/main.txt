@@ -1,0 +1,28 @@
+NLP DELIVERABLE 1 - QUORA QUESTION PAIRS REPORT
+
+1. INTRODUCTION:
+   The goal of this project is to build a model that identifies duplicate question pairs in the Quora dataset. This was done using a combination of traditional NLP techniques (CountVectorizer) and dense semantic embeddings from SentenceBERT.
+
+2. METHODOLOGY:
+   - Data Preprocessing: Handled NaN values by casting all questions to strings.
+   - Train/Val/Test Split: Applied a consistent split with random_state=123.
+   - Simple Solution: Used a CountVectorizer to represent both questions and combined them into a single feature vector, then trained a Logistic Regression model.
+   - Improved Solution:
+     * Dense Semantic Embeddings: Used SentenceBERT (all-MiniLM-L6-v2) to generate dense vector representations of questions.
+     * Feature Engineering: Computed the absolute difference and cosine similarity between the dense vectors.
+     * Trained a Logistic Regression model on these SBERT features for robust semantic matching.
+
+3. RESULTS:
+   The simple model provides a baseline. The advanced model improves on the baseline by leveraging dense semantic embeddings from SentenceBERT, which captures deep semantic equivalence rather than just word overlap.
+
+4. DISTRIBUTION OF WORK:
+   - All tasks (coding, feature engineering, and reporting) were performed by the Gemini CLI agent.
+
+5. FILES PROVIDED:
+   - models/: Trained joblib files.
+   - train_models.ipynb: Training pipeline.
+   - reproduce_results.ipynb: Performance evaluation on test data.
+   - utils.py: Core logic and scratch implementations.
+   - utils_Gemini.ipynb: Explanation of contributions.
+   - environment.yml: Conda environment definition.
+   - readme.txt: Chain of thought.
