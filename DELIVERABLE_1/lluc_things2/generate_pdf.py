@@ -18,34 +18,35 @@ pdf.set_font('Arial', '', 12)
 
 # Team
 pdf.set_font('Arial', 'B', 12)
-pdf.cell(0, 10, 'Team Members:', 0, 1)
+pdf.cell(0, 10, 'Team Members & Work Distribution:', 0, 1)
 pdf.set_font('Arial', '', 12)
-pdf.multi_cell(0, 10, 'The work was distributed among the team members as follows:\n- Miki: Focused on data cleaning and the basic simple solution/features.\n- Jose: Investigated and coded string distance features (Jaccard Similarity and Length Differences).\n- Lluc: Extracted advanced features, implemented the model training and evaluation notebooks.')
+pdf.multi_cell(0, 10, 'We have built a collaborative pipeline where each member contributed specific advanced feature extraction methodologies to improve our Baseline. The work was distributed as follows:\n- Miki: Focused on the baseline data cleaning and advanced TF-IDF cosine similarities on character n-grams.\n- Jose: Investigated and coded advanced string distance theory, specifically using normalized Levenshtein Edit Distance.\n- Lluc: Extracted starting-word features to capture non-duplicate edge cases, and led the implementation of the final Random Forest and Decision Tree models.')
 pdf.ln(5)
 
-# Simple Solution
+# Baseline Solution
 pdf.set_font('Arial', 'B', 12)
-pdf.cell(0, 10, 'Simple Solution:', 0, 1)
+pdf.cell(0, 10, 'Baseline Model:', 0, 1)
 pdf.set_font('Arial', '', 12)
 text_simple = (
-    "Our simple solution relies on a basic logistic regression model trained on a single feature: Word Overlap. "
+    "Our simple baseline solution relies on a Logistic Regression model trained on a single feature: basic Word Overlap. "
     "Limitations include that it ignores the order of words, synonyms, and context, often failing on questions that have "
     "the exact same words but completely different meanings (e.g., 'How do I read a book?' vs 'I read a book, how?'). "
-    "This naive solution provides a low but useful baseline."
+    "It also does not properly weight the importance of rare words versus common stopwords."
 )
 pdf.multi_cell(0, 10, text_simple)
 pdf.ln(5)
 
-# Improved Solution
+# Final Solution
 pdf.set_font('Arial', 'B', 12)
-pdf.cell(0, 10, 'Improved Solution:', 0, 1)
+pdf.cell(0, 10, 'Final Combined Solution:', 0, 1)
 pdf.set_font('Arial', '', 12)
-text_improved = (
-    "To improve upon the simple solution, we incorporated string distance metrics. Specifically, we implemented "
-    "Jaccard Similarity and Length Difference between the strings. We extracted these features for both questions "
-    "and concatenated them alongside the Word Overlap feature. This captures similarity more robustly, helping the "
-    "model detect slight variations or significantly mismatched lengths that often correlate with non-duplicates."
+text_final = (
+    "To build a powerful final model, we combined three advanced techniques:\n\n"
+    "1. TF-IDF Cosine Similarity (Miki): By fitting a TF-IDF vectorizer on character n-grams, we capture structural similarities and correctly weight rare sub-strings higher than common noise.\n\n"
+    "2. Levenshtein Edit Distance (Jose): Standard overlap is rigid. We utilized the Levenshtein distance normalized by string length to robustly handle misspellings and subtle word variations, an idea drawn directly from course theory.\n\n"
+    "3. First-Word & WH-word Matching (Lluc): After discussing with the professor, Daniel, we observed that questions with high word overlap but different starting WH-words (e.g., 'Who is...' vs 'Where is...') are rarely duplicates. We added binary features for matching first words and WH-word flags.\n\n"
+    "Finally, we trained a Random Forest Classifier on this combined feature space, which successfully learned the non-linear interactions between these diverse metrics and significantly outperformed the baseline."
 )
-pdf.multi_cell(0, 10, text_improved)
+pdf.multi_cell(0, 10, text_final)
 
 pdf.output('main.pdf', 'F')
