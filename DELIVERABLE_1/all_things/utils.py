@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import paired_cosine_distances
 
 # ─────────────────────────────────────────────────────────────────────────────
-# CONSTANTS & TOKENIZERS (From utils2.py)
+# CONSTANTS & TOKENIZERS
 # ─────────────────────────────────────────────────────────────────────────────
 ENGLISH_STOPWORDS = frozenset({
     'a', 'an', 'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
@@ -39,7 +39,7 @@ def char_ngram_tokenizer(text, n=3):
     return [t[i:i + n] for i in range(max(0, len(t) - n + 1))]
 
 # ─────────────────────────────────────────────────────────────────────────────
-# DISTANCE FUNCTIONS (From Scratch, from utils2.py)
+# DISTANCE FUNCTIONS (From Scratch)
 # ─────────────────────────────────────────────────────────────────────────────
 def jaccard_similarity(tokens1, tokens2):
     s1, s2 = set(tokens1), set(tokens2)
