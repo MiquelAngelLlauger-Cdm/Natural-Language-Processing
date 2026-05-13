@@ -1,0 +1,163 @@
+NLP Deliverable 2 Guide
+
+1
+
+Introduction
+
+The objective of this project is to apply machine learning techniques to a Named Entity
+Recognition (NER) task. Algorithms to solve NER tasks are very useful in many contexts,
+from information retrieval to question answering systems.
+When solving our NER task, we will confront two different machine learning approaches:
+the classic machine learning approach based on handcrafted features and modern machine
+learning, where the features are automatically extracted from the training data by the learning
+algorithm.
+
+2
+
+Deliverable zip file
+
+This project has to be submitted by a single member of each group using a specific task
+created in the webpage of the course. The project needs to be in a zip file containing all
+the code to reproduce the results. The zip file containing all the work needs to have the
+following form:
+• name1 name2 name3.zip. Where name1,name2,... are the names of the members of
+each group. Please write your full name. Example: If your name is “John Doe” write
+JohnDoe.
+• Groups can be up to 4 people. The project documentation should contain a section
+briefly describing how the work has been distributed between the group members.
+
+3
+
+Basic rules of the deliverable
+• The zip file needs a main.pdf file with a description of your work.
+• The zip needs a notebook reproduce results.ipynb that loads the work and evaluates it.
+– Accuracy on the train set and test set but taking into account only those predictions where the ground truth is not “O”.
+– Confusion matrix on the train and test set.
+– F-score
+(see
+https://scikit-learn.org/stable/modules/generated/
+sklearn.metrics.f1_score.html).
+– The predictions for the TINY TEST (look below) and the accuracy in such
+dataset.
+• The data used for this project is train data ner.csv, test data ner.csv containing
+training data and test data respectively.
+
+1
+
+• Since the project may be too heavy, it should be sent by email to daniel.ortiz@ub.
+edu by a single member of each group. In the email, you may provide a link to dropbox
+or similar.
+• In addition to this, the document main.pdf should be submitted also by a single group
+member to the corresponding task in the virtual campus.
+• The deadline for the project will be the 20 of june at 11:59 pm.
+• The zip file does not need to include the training data (but you can include it if you
+want).
+Each requirement from this document that is not satisfied in your work will imply a
+reduction on your final mark.
+
+4
+
+Project structure
+
+Your project must be in a folder with the following tree structure:
+> name1_name2_name3
+> main.pdf
+> data
+> train_data_ner.csv
+> test_data_ner.csv
+> tiny_test.csv
+> train_models.ipynb
+> reproduce_results.ipynb
+> fitted_models
+> model1
+> model2
+...
+> utils
+> utils.py
+> environment.yml
+Some details:
+• main.pdf is a document containing a general description of your work and your results.
+More details about this can be found in Section 4.1.
+• train models.ipynb is a notebook containing all the code required to train the models
+and store them in fitted models
+• reproduce results.ipynb is a notebook that must: load the data, load the fitted models from disk and evaluate the models, following the rules for the deliverable described
+in this document.
+• fitted models is a folder where you will save your trained models. Any model used
+in reproduce results.ipynb should be imported from fitted models.
+• utils is a folder containing functions that might be used in the train models.ipynb
+and/or reproduce results.ipynb. The goal is to keep the notebooks clean (avoid
+writing large functions inside the notebook, if you do it you can take them out, write
+them in utils.py, import them and use them).
+2
+
+• enviroment.yml: environment file to ensure that your code is runable in another machine. The same kind of file that was requested for the first deliverable. It can be
+created by activating the desired environment and then executing
+conda activate environment
+conda env export > environment.yml
+4.1
+
+Content of main.pdf file
+
+The main.pdf file should contain a description of the carried out work, including the results
+obtained. The document content should be defined so that it can be read independently from
+the rest of the submitted files.
+The file should have the following structure:
+1. Document front page with title and names of team members.
+2. Table of contents.
+3. Introduction (problem to be solved, general description of the data and main techniques
+that were applied, etc.).
+4. Exploratory data analysis (description of the data statistics that are considered relevant).
+5. Methodology (brief description of the techniques applied to solve the task).
+6. Experimental setup (training configuration for the different models, evaluation metrics,
+etc.).
+7. Results.
+8. Conclusions.
+9. Team member contributions.
+10. Use of AI.
+4.2
+
+What models to test
+
+You need to test:
+• The CRF model explained during the course. You can think about adding or modifiying
+feature templates to improve results. Additionally, you can also try the structured
+perceptron model. In this case, you can use the code provided in the corresponding
+course notebook.
+• At least one deep learning model.
+
+3
+
+4.3
+
+TINY TEST
+
+Notebook reproduce results.ipynb should print the predicted tags for the following TINY TEST
+in the format
+w1/t1 w2/t2 w3/t3 w4/t4
+where wi is a word and ti the tag associated to wi.
+# TINY_TEST (these sentences and the ground truth labels are given in the
+#
+tiny_test.csv file)
+The programmers from Barcelona might write a sentence without a spell
+checker.
+The programmers from Barchelona cannot write a sentence without a spell
+checker.
+Jack London went to Parris.
+Jack London went to Paris.
+Bill gates and Steve jobs never thought Microsoft would become such a big
+company.
+Bill Gates and Steve Jobs never thought Microsof would become such a big
+company.
+The president of U.S.A thought they could win the war.
+The president of the United States of America thought they could win the war
+.
+The king of Saudi Arabia wanted total control.
+Robin does not want to go to Saudi Arabia.
+Apple is a great company.
+I really love apples and oranges.
+Alice and Henry went to the Microsoft store to buy a new computer during
+their trip to New York.
+
+4
+
+
