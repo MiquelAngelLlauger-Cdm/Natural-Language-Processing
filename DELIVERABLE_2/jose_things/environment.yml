@@ -1,0 +1,25 @@
+name: nlp_d2
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - numpy=1.26.*
+  - pandas=2.3.*
+  - scikit-learn=1.8.*
+  - matplotlib=3.10.*
+  - seaborn=0.13.*
+  - jupyter
+  - ipykernel
+  - pip:
+      - sklearn-crfsuite
+      - torch==2.2.2
+      - transformers==4.38.2
+      - datasets==4.8.5
+      - evaluate==0.4.6
+      - seqeval
+# NOTE: These notebooks are also designed to run on Google Colab with a GPU.
+# On Colab the base scientific stack (numpy/pandas/sklearn/torch/transformers) is
+# preinstalled; each notebook includes a `!pip install` cell for the few extra
+# packages (sklearn-crfsuite, seqeval) and auto-detects cuda/mps/cpu.
