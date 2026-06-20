@@ -54,10 +54,16 @@ smoke-test, **99.5%** del vocabulario quedó inicializado desde GloVe). Lookup c
 fallback a minúsculas, early stopping. Guarda `bilstm_glove_model.pth` +
 `bilstm_glove_mappings.pkl`.
 
-> **Recomendado para el mejor resultado no-transformer:** combinar ambos — GloVe + BiLSTM
-> + CRF. Nota: los números locales de estos dos notebooks salen bajos porque corren en
-> modo CPU-rápido (subset + pocas épocas, aún convergiendo); su rendimiento real se ve al
-> re-ejecutarlos en **Colab GPU** (`FULL=True`, datos completos, 30 épocas).
+#### `03_3_BiLSTM_GloVe_CRF.ipynb` — combo (mejor modelo no-transformer)
+Une las dos mejoras en una sola arquitectura `Embedding(GloVe) → BiLSTM → Linear → CRF`
+con early stopping. GloVe ataca el OOV, el CRF da consistencia estructural y el BiLSTM el
+contexto. Es el estándar pre-transformer y el mejor de la familia `03.x` (en el smoke-test
+CPU ya supera a 03_1 y 03_2). Guarda `bilstm_glove_crf_model.pth` +
+`bilstm_glove_crf_mappings.pkl`.
+
+> **Nota:** los números locales de los notebooks `03_1/03_2/03_3` salen bajos porque corren
+> en modo CPU-rápido (subset + pocas épocas, aún convergiendo); su rendimiento real se ve
+> al re-ejecutarlos en **Colab GPU** (`FULL=True`, datos completos, 30 épocas).
 
 ### Paso 4 — `04_Model_DL_Transformer.ipynb` (DL #2)
 Fine-tuning de **DistilBERT** (`distilbert-base-cased`) para token classification, con
