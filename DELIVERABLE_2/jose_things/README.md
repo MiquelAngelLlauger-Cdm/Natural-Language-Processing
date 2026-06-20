@@ -65,6 +65,18 @@ CPU ya supera a 03_1 y 03_2). Guarda `bilstm_glove_crf_model.pth` +
 > en modo CPU-rápido (subset + pocas épocas, aún convergiendo); su rendimiento real se ve
 > al re-ejecutarlos en **Colab GPU** (`FULL=True`, datos completos, 30 épocas).
 
+**Dimensión de los embeddings GloVe (03_2 / 03_3).** Por defecto se usa
+`glove-wiki-gigaword-100` (`EMB_DIM=100`). Para más capacidad semántica se puede subir a
+300d cambiando **las dos líneas a la vez** en la celda de Setup
+(`EMB_DIM=300` y `GLOVE_NAME='glove-wiki-gigaword-300'`); mides disponibles: 50/100/200/300.
+A 300d la descarga es mayor (~376 MB) y el modelo más pesado, pero suele mejorar resultados.
+
+**Fix de Colab (gensim + torch).** En Colab, `pip install gensim` puede tocar `numpy/scipy`
+por debajo de un `torch` ya compilado y romper `import torch` con el error
+*"Only a single TORCH_LIBRARY ... triton"*. La celda de Setup de `03_1/03_2/03_3` instala
+las dependencias solo si faltan y **reinicia el runtime una vez** (`os.kill(os.getpid(), 9)`)
+para que torch cargue limpio; basta re-ejecutar la celda tras el reinicio.
+
 ### Paso 4 — `04_Model_DL_Transformer.ipynb` (DL #2)
 Fine-tuning de **DistilBERT** (`distilbert-base-cased`) para token classification, con
 alineación de etiquetas a sub-tokens (etiqueta en el primer sub-token, `-100` en el
@@ -105,10 +117,16 @@ conda activate nlp_d2
 # Entrenar (genera los artefactos en fitted_models/):
 jupyter nbconvert --to notebook --execute --inplace 02_Model_CRF.ipynb
 jupyter nbconvert --to notebook --execute --inplace 03_Model_DL_BiLSTM.ipynb
+jupyter nbconvert --to notebook --execute --inplace 03_1_BiLSTM_CRF.ipynb
+jupyter nbconvert --to notebook --execute --inplace 03_2_BiLSTM_GloVe.ipynb
+jupyter nbconvert --to notebook --execute --inplace 03_3_BiLSTM_GloVe_CRF.ipynb
 jupyter nbconvert --to notebook --execute --inplace 04_Model_DL_Transformer.ipynb
 # Evaluar (carga todo desde disco):
 jupyter nbconvert --to notebook --execute --inplace 05_reproduce_results.ipynb
 ```
+
+> Para el rendimiento real de los modelos DL, ejecútalos en **Colab con GPU** (cada
+> notebook detecta Colab, instala dependencias y activa `FULL=True` automáticamente).
 
 Todos los notebooks detectan Google Colab y ajustan rutas / instalan dependencias
 automáticamente.
@@ -162,7 +180,42 @@ entrenamiento completo supera al CRF v3 y pasa a ser el mejor modelo.
 
 ## 5. Pendiente para la entrega final
 - `main.pdf`: informe (portada, índice, intro, EDA, metodología, setup, resultados,
-  conclusiones, contribuciones, uso de IA).
+  conclusiones, contribuciones, uso de IA). Ver guion en `report_outline.md`.
 - Estructura del zip que pide la guía: `data/`, `train_models.ipynb`,
   `reproduce_results.ipynb`, `fitted_models/`, `utils/utils.py`, `environment.yml`.
-- (Opcional pero recomendado) entrenar DistilBERT completo en Colab GPU.
+- (Opcional pero recomendado) entrenar DistilBERT y `03_3` completos en Colab GPU.
+
+---
+
+## 6. Inventario de modelos
+
+| # | Notebook | Modelo | Familia | Artefacto |
+|---|---|---|---|---|
+| 02 | `02_Model_CRF.ipynb` | CRF v1/v2/v3 | Clásico | `crf_v1/v2/v3.pkl` |
+| 03 | `03_Model_DL_BiLSTM.ipynb` | BiLSTM (from scratch) | DL RNN | `bilstm_model.pth` + `dl_mappings.pkl` |
+| 03_1 | `03_1_BiLSTM_CRF.ipynb` | BiLSTM + CRF | DL RNN | `bilstm_crf_model.pth` + `bilstm_crf_mappings.pkl` |
+| 03_2 | `03_2_BiLSTM_GloVe.ipynb` | BiLSTM + GloVe | DL RNN | `bilstm_glove_model.pth` + `bilstm_glove_mappings.pkl` |
+| 03_3 | `03_3_BiLSTM_GloVe_CRF.ipynb` | GloVe + BiLSTM + CRF | DL RNN | `bilstm_glove_crf_model.pth` + `bilstm_glove_crf_mappings.pkl` |
+| 04 | `04_Model_DL_Transformer.ipynb` | DistilBERT (fine-tuned) | DL Transformer | `distilbert_ner/` + `distilbert_labels.pkl` |
+
+---
+
+## 7. Cambios recientes (changelog)
+
+- **CRF (02):** tres versiones con features crecientes (baseline → mejorado → fabuloso);
+  arreglado el tiny-test (lectura agrupada por `sentence_id`). Mejor: CRF v3 (test F1 0.753).
+- **BiLSTM (03):** modelo base desde cero; identificado sobreajuste fuerte (train 0.99 /
+  test 0.52) por OOV + decisiones por token independientes.
+- **Nuevo `03_1` BiLSTM-CRF:** capa CRF (transiciones + Viterbi) + validación, early
+  stopping y weight decay.
+- **Nuevo `03_2` BiLSTM+GloVe:** embeddings GloVe pre-entrenados + **vocabulario extendido
+  con GloVe** para cubrir OOV (99.5% del vocab inicializado); lookup case→minúsculas.
+- **Nuevo `03_3` GloVe+BiLSTM+CRF:** combo de ambas mejoras; mejor modelo no-transformer.
+- **DistilBERT (04):** fine-tuning con alineación de etiquetas a sub-tokens; modo
+  CPU-fallback para correr local y full en Colab GPU.
+- **`05_reproduce_results.ipynb`:** carga todos los modelos de disco y evalúa
+  (accuracy non-O, matrices de confusión train/test, F1, tiny-test). Carga DistilBERT solo
+  si existe el artefacto.
+- **Infra/Colab:** semillas fijadas en los `03_x`; opción de GloVe **300d**; fix del error
+  `TORCH_LIBRARY ... triton` (instalar solo si falta + reinicio único del runtime).
+- **Docs:** este README + `report_outline.md` (guion del informe).
