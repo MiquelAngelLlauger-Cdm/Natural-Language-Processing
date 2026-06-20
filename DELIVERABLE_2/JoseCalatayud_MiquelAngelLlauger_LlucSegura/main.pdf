@@ -1,0 +1,353 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R 22 0 R 24 0 R] /Count 10 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 729 >>
+stream
+BT /F1 12 Tf 1 0 0 1 145 620 Tm (NER Deliverable 2) Tj ET
+BT /F2 26 Tf 1 0 0 1 145 593 Tm (Named Entity Recognition) Tj ET
+BT /F2 18 Tf 1 0 0 1 220 550 Tm (Deliverable 2) Tj ET
+BT /F1 12 Tf 1 0 0 1 145 515 Tm (Classic feature engineering and modern deep learning) Tj ET
+BT /F1 12 Tf 1 0 0 1 145 488 Tm (Team members) Tj ET
+BT /F1 12 Tf 1 0 0 1 145 461 Tm (Jose Calatayud) Tj ET
+BT /F1 12 Tf 1 0 0 1 145 434 Tm (Miquel Àngel Llauger) Tj ET
+BT /F1 12 Tf 1 0 0 1 145 407 Tm (Lluc Segura) Tj ET
+BT /F1 12 Tf 1 0 0 1 145 380 Tm (Natural Language Processing) Tj ET
+BT /F1 12 Tf 1 0 0 1 145 353 Tm (Universitat de Barcelona) Tj ET
+BT /F1 12 Tf 1 0 0 1 145 326 Tm (20 June 2026) Tj ET
+BT /F1 8 Tf 0.35 g 1 0 0 1 278 25 Tm (1 / 10) Tj ET
+
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 716 >>
+stream
+BT /F2 19 Tf 1 0 0 1 50 785 Tm (2. Table of contents) Tj ET
+0.25 0.45 0.65 RG 50 766 m 545 766 l S
+BT /F1 11 Tf 1 0 0 1 75 751 Tm (- Front page) Tj ET
+BT /F1 11 Tf 1 0 0 1 75 728 Tm (- Table of contents) Tj ET
+BT /F1 11 Tf 1 0 0 1 75 705 Tm (- Introduction) Tj ET
+BT /F1 11 Tf 1 0 0 1 75 682 Tm (- Exploratory data analysis) Tj ET
+BT /F1 11 Tf 1 0 0 1 75 659 Tm (- Methodology) Tj ET
+BT /F1 11 Tf 1 0 0 1 75 636 Tm (- Experimental setup) Tj ET
+BT /F1 11 Tf 1 0 0 1 75 613 Tm (- Results) Tj ET
+BT /F1 11 Tf 1 0 0 1 75 590 Tm (- Conclusions) Tj ET
+BT /F1 11 Tf 1 0 0 1 75 567 Tm (- Team member contributions) Tj ET
+BT /F1 11 Tf 1 0 0 1 75 544 Tm (- Use of AI) Tj ET
+BT /F1 8 Tf 0.35 g 1 0 0 1 278 25 Tm (2 / 10) Tj ET
+
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 1504 >>
+stream
+BT /F2 19 Tf 1 0 0 1 50 785 Tm (3. Introduction) Tj ET
+0.25 0.45 0.65 RG 50 766 m 545 766 l S
+BT /F1 10 Tf 1 0 0 1 50 751 Tm (Named Entity Recognition \(NER\) assigns a semantic label to each token in a sentence,) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 737 Tm (identifying people, locations, organisations, times and other entity types. It is a) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 723 Tm (sequence-labelling problem used in information retrieval, search, question answering and) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 709 Tm (knowledge extraction. This project compares the two approaches requested in the course) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 695 Tm (guide: a classic conditional random field \(CRF\) based on handcrafted features and) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 681 Tm (deep-learning systems that learn representations from data.) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 662 Tm (The work follows a controlled progression. Three CRFs show the effect of increasingly rich) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 648 Tm (morphology and context. A BiLSTM removes manual feature engineering but exposes overfitting,) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 634 Tm (out-of-vocabulary \(OOV\) handling and independent tag decisions. GloVe embeddings address) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 620 Tm (lexical coverage, a CRF output layer models sequence transitions, their combination) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 606 Tm (addresses both issues, and DistilBERT adds contextual subword representations.) Tj ET
+BT /F1 8 Tf 0.35 g 1 0 0 1 278 25 Tm (3 / 10) Tj ET
+
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 1306 >>
+stream
+BT /F2 19 Tf 1 0 0 1 50 785 Tm (4. Exploratory data analysis) Tj ET
+0.25 0.45 0.65 RG 50 766 m 545 766 l S
+BT /F1 10 Tf 1 0 0 1 50 751 Tm (The supplied token-level CSV files contain approximately 38,366 training sentences and) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 737 Tm (38,367 test sentences, with roughly 840,000 tokens in each large split. The TINY TEST) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 723 Tm (contains 13 deliberately ambiguous or misspelled sentences. Tokens are grouped by) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 709 Tm (sentence_id; every token has a word and a BIO tag.) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 690 Tm (There are 17 evaluation labels: O plus B/I variants for geo, gpe, org, per, tim, art, eve) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 676 Tm (and nat. About 83% of tokens are O, so ordinary token accuracy would be misleading. Rare) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 662 Tm (labels such as natural phenomena, events and artefacts occur only a few hundred times.) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 648 Tm (Sentence-length inspection motivates a maximum sequence length of 60 for the recurrent) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 634 Tm (models. The train/test vocabulary mismatch also motivates pretrained and subword) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 620 Tm (representations.) Tj ET
+BT /F1 8 Tf 0.35 g 1 0 0 1 278 25 Tm (4 / 10) Tj ET
+
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 2318 >>
+stream
+BT /F2 19 Tf 1 0 0 1 50 785 Tm (5. Methodology) Tj ET
+0.25 0.45 0.65 RG 50 766 m 545 766 l S
+BT /F2 13 Tf 1 0 0 1 50 751 Tm (5.1 Conditional random fields) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 725 Tm (Three linear-chain CRFs were implemented with sklearn-crfsuite. Version 1 uses lowercase,) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 711 Tm (case, title-case and digit indicators. Version 2 adds prefixes, suffixes, word shape and) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 697 Tm (one-token context. Version 3 adds multi-length affixes, normalised shape, orthographic flags) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 683 Tm (and context within two tokens, with adjusted L1/L2 regularisation. A CRF scores an entire) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 669 Tm (label sequence, so learned transitions encourage valid BIO patterns.) Tj ET
+BT /F2 13 Tf 1 0 0 1 50 650 Tm (5.2 BiLSTM family) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 624 Tm (The baseline PyTorch BiLSTM learns word embeddings from scratch and encodes left and right) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 610 Tm (context before token-wise classification. The BiLSTM-CRF replaces independent softmax) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 596 Tm (decisions with learned transition scores and Viterbi decoding, using validation-based early) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 582 Tm (stopping and weight decay. The GloVe variant initialises a 300-dimensional embedding table) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 568 Tm (from glove-wiki-gigaword-300, uses case-aware lowercase fallback and extends the vocabulary) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 554 Tm (for improved OOV coverage. The combined GloVe-BiLSTM-CRF incorporates both pretrained) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 540 Tm (lexical knowledge and structured decoding.) Tj ET
+BT /F2 13 Tf 1 0 0 1 50 521 Tm (5.3 DistilBERT) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 495 Tm (distilbert-base-cased was fine-tuned for token classification. Word labels are aligned to) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 481 Tm (WordPiece tokens: the first subtoken receives the word label and later subtokens are ignored) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 467 Tm (in the loss with -100. Contextual embeddings can distinguish uses such as Apple the) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 453 Tm (organisation from apples the fruit, while subwords reduce the impact of unseen spellings.) Tj ET
+BT /F1 8 Tf 0.35 g 1 0 0 1 278 25 Tm (5 / 10) Tj ET
+
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 1241 >>
+stream
+BT /F2 19 Tf 1 0 0 1 50 785 Tm (6. Experimental setup) Tj ET
+0.25 0.45 0.65 RG 50 766 m 545 766 l S
+BT /F1 10 Tf 1 0 0 1 50 751 Tm (Random seeds are fixed to 42. Neural variants use a 90/10 training/validation split, Adam) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 737 Tm (optimisation, dropout, weight decay and early stopping. Typical recurrent settings are) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 723 Tm (hidden size 128, maximum length 60, batch size 64 and learning rate 0.001. DistilBERT uses a) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 709 Tm (cased checkpoint, learning rate around 3e-5 and GPU-oriented full training; CPU fallback) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 695 Tm (deliberately uses fewer samples and epochs.) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 676 Tm (Following the guide, the primary accuracy is computed only at positions whose gold tag is) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 662 Tm (not O. Weighted token F1 excludes O, confusion matrices are produced for train and test, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 648 Tm (the 13 TINY TEST predictions are printed as word/tag pairs together with non-O accuracy. The) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 634 Tm (independent test split is never used to update parameters.) Tj ET
+BT /F1 8 Tf 0.35 g 1 0 0 1 278 25 Tm (6 / 10) Tj ET
+
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Length 6014 >>
+stream
+BT /F2 19 Tf 1 0 0 1 50 785 Tm (7. Results) Tj ET
+0.25 0.45 0.65 RG 50 766 m 545 766 l S
+0.86 0.91 0.95 rg 38 727 137 24 re f
+0.45 0.52 0.58 RG 38 727 137 24 re S
+0 g BT /F2 6.5 Tf 1 0 0 1 42 736 Tm (Model) Tj ET
+0.86 0.91 0.95 rg 175 727 75 24 re f
+0.45 0.52 0.58 RG 175 727 75 24 re S
+0 g BT /F2 6.2 Tf 1 0 0 1 179 736 Tm (Train non-O acc.) Tj ET
+0.86 0.91 0.95 rg 250 727 75 24 re f
+0.45 0.52 0.58 RG 250 727 75 24 re S
+0 g BT /F2 6.2 Tf 1 0 0 1 254 736 Tm (Test non-O acc.) Tj ET
+0.86 0.91 0.95 rg 325 727 80 24 re f
+0.45 0.52 0.58 RG 325 727 80 24 re S
+0 g BT /F2 6.2 Tf 1 0 0 1 329 736 Tm (Train weighted F1) Tj ET
+0.86 0.91 0.95 rg 405 727 80 24 re f
+0.45 0.52 0.58 RG 405 727 80 24 re S
+0 g BT /F2 6.2 Tf 1 0 0 1 409 736 Tm (Test weighted F1) Tj ET
+0.86 0.91 0.95 rg 485 727 72 24 re f
+0.45 0.52 0.58 RG 485 727 72 24 re S
+0 g BT /F2 6.2 Tf 1 0 0 1 489 736 Tm (Tiny acc.) Tj ET
+0.45 0.52 0.58 RG 38 703 137 24 re S
+0 g BT /F1 6.5 Tf 1 0 0 1 42 712 Tm (CRF v1) Tj ET
+0.45 0.52 0.58 RG 175 703 75 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 179 712 Tm (0.864) Tj ET
+0.45 0.52 0.58 RG 250 703 75 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 254 712 Tm (0.477) Tj ET
+0.45 0.52 0.58 RG 325 703 80 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 329 712 Tm (0.876) Tj ET
+0.45 0.52 0.58 RG 405 703 80 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 409 712 Tm (0.477) Tj ET
+0.45 0.52 0.58 RG 485 703 72 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 489 712 Tm (0.765) Tj ET
+0.45 0.52 0.58 RG 38 679 137 24 re S
+0 g BT /F1 6.5 Tf 1 0 0 1 42 688 Tm (CRF v2) Tj ET
+0.45 0.52 0.58 RG 175 679 75 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 179 688 Tm (0.931) Tj ET
+0.45 0.52 0.58 RG 250 679 75 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 254 688 Tm (0.705) Tj ET
+0.45 0.52 0.58 RG 325 679 80 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 329 688 Tm (0.934) Tj ET
+0.45 0.52 0.58 RG 405 679 80 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 409 688 Tm (0.727) Tj ET
+0.45 0.52 0.58 RG 485 679 72 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 489 688 Tm (0.882) Tj ET
+0.45 0.52 0.58 RG 38 655 137 24 re S
+0 g BT /F1 6.5 Tf 1 0 0 1 42 664 Tm (CRF v3) Tj ET
+0.45 0.52 0.58 RG 175 655 75 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 179 664 Tm (0.963) Tj ET
+0.45 0.52 0.58 RG 250 655 75 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 254 664 Tm (0.732) Tj ET
+0.45 0.52 0.58 RG 325 655 80 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 329 664 Tm (0.965) Tj ET
+0.45 0.52 0.58 RG 405 655 80 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 409 664 Tm (0.753) Tj ET
+0.45 0.52 0.58 RG 485 655 72 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 489 664 Tm (0.765) Tj ET
+0.45 0.52 0.58 RG 38 631 137 24 re S
+0 g BT /F1 6.5 Tf 1 0 0 1 42 640 Tm (BiLSTM) Tj ET
+0.45 0.52 0.58 RG 175 631 75 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 179 640 Tm (0.834) Tj ET
+0.45 0.52 0.58 RG 250 631 75 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 254 640 Tm (0.460) Tj ET
+0.45 0.52 0.58 RG 325 631 80 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 329 640 Tm (0.847) Tj ET
+0.45 0.52 0.58 RG 405 631 80 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 409 640 Tm (0.477) Tj ET
+0.45 0.52 0.58 RG 485 631 72 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 489 640 Tm (0.765) Tj ET
+0.45 0.52 0.58 RG 38 607 137 24 re S
+0 g BT /F1 6.5 Tf 1 0 0 1 42 616 Tm (DistilBERT \(CPU fallback\)) Tj ET
+0.45 0.52 0.58 RG 175 607 75 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 179 616 Tm (0.759) Tj ET
+0.45 0.52 0.58 RG 250 607 75 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 254 616 Tm (0.585) Tj ET
+0.45 0.52 0.58 RG 325 607 80 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 329 616 Tm (0.762) Tj ET
+0.45 0.52 0.58 RG 405 607 80 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 409 616 Tm (0.590) Tj ET
+0.45 0.52 0.58 RG 485 607 72 24 re S
+0 g BT /F1 6.2 Tf 1 0 0 1 489 616 Tm (0.882) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 587 Tm (The strongest reported full test result is CRF v3 \(weighted F1 0.753\), and the increase from) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 573 Tm (v1 to v3 demonstrates the value of feature engineering. CRF v2 and CPU-fallback DistilBERT) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 559 Tm (obtain the best TINY TEST accuracy \(0.882\). The baseline BiLSTM generalises poorly compared) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 545 Tm (with its training performance because learned embeddings collapse unseen words to <UNK> and) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 531 Tm (tags are selected independently.) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 512 Tm (The additional BiLSTM-CRF, BiLSTM-GloVe and combined GloVe-BiLSTM-CRF experiments are) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 498 Tm (retained in the training notebook and fitted-model directory. Their notebook runs show that) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 484 Tm (pretrained embeddings improve lexical coverage and CRF decoding improves BIO consistency,) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 470 Tm (but results depend strongly on whether the CPU smoke-test or full GPU configuration is used.) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 456 Tm (For that reason, the table reports only the directly comparable values captured by the) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 442 Tm (central reproduction run and does not mix smoke-test figures with full-data figures.) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 423 Tm (Artifact note. The submitted DistilBERT directory contains configuration and tokenizer files) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 409 Tm (but no model weight file. The preserved notebook outputs document its run, while fresh) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 395 Tm (reproduction should skip it unless the weights are regenerated by train_models.ipynb. All) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 381 Tm (supplied CRF and recurrent weight artifacts are included.) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 362 Tm (Qualitatively, the TINY TEST exposes ambiguity and robustness limits: London can be a) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 348 Tm (surname or location, Apple can be an organisation or a common noun, and misspellings such as) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 334 Tm (Barchelona, Parris and Microsof test generalisation beyond memorisation. Contextual and) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 320 Tm (subword models are well suited to these cases, while CRF morphology remains surprisingly) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 306 Tm (competitive.) Tj ET
+BT /F1 8 Tf 0.35 g 1 0 0 1 278 25 Tm (7 / 10) Tj ET
+
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 17 0 R >>
+endobj
+19 0 obj
+<< /Length 1461 >>
+stream
+BT /F2 19 Tf 1 0 0 1 50 785 Tm (8. Conclusions) Tj ET
+0.25 0.45 0.65 RG 50 766 m 545 766 l S
+BT /F1 10 Tf 1 0 0 1 50 751 Tm (The experiments confirm that a carefully engineered CRF is a strong NER baseline. Richer) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 737 Tm (local context and morphology produced the best comparable test score without requiring a) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 723 Tm (GPU. Deep learning removes manual feature design, but a from-scratch BiLSTM needs explicit) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 709 Tm (safeguards against OOV collapse, overfitting and invalid output transitions. GloVe and a CRF) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 695 Tm (head target these weaknesses separately and combine naturally. DistilBERT offers the most) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 681 Tm (expressive contextual representation, but its result here is limited by fallback training) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 667 Tm (and incomplete exported weights.) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 648 Tm (Future work should train all neural systems under one full-GPU protocol, retain every final) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 634 Tm (checkpoint, tune CRF regularisation by validation search, report macro and entity-level F1) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 620 Tm (with seqeval, and analyse rare labels separately. These changes would improve both) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 606 Tm (scientific comparability and reproducibility.) Tj ET
+BT /F1 8 Tf 0.35 g 1 0 0 1 278 25 Tm (8 / 10) Tj ET
+
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 19 0 R >>
+endobj
+21 0 obj
+<< /Length 823 >>
+stream
+BT /F2 19 Tf 1 0 0 1 50 785 Tm (9. Team member contributions) Tj ET
+0.25 0.45 0.65 RG 50 766 m 545 766 l S
+BT /F1 10 Tf 1 0 0 1 50 751 Tm (Jose Calatayud: implemented and documented the CRF progression, recurrent and Transformer) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 737 Tm (experiments, fitted-model persistence, and consolidated reproduction workflow.) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 718 Tm (Miquel Àngel Llauger: contributed delivery structure, shared utility design, reproducibility) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 704 Tm (checks and review of the evaluation requirements.) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 685 Tm (Lluc Segura: contributed data/EDA review, report organisation, interpretation of results and) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 671 Tm (final quality assurance.) Tj ET
+BT /F1 8 Tf 0.35 g 1 0 0 1 278 25 Tm (9 / 10) Tj ET
+
+endstream
+endobj
+22 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 21 0 R >>
+endobj
+23 0 obj
+<< /Length 782 >>
+stream
+BT /F2 19 Tf 1 0 0 1 50 785 Tm (10. Use of AI) Tj ET
+0.25 0.45 0.65 RG 50 766 m 545 766 l S
+BT /F1 10 Tf 1 0 0 1 50 751 Tm (Generative AI tools were used as development assistance for code review, debugging,) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 737 Tm (documentation, restructuring notebooks to match the submission specification, and improving) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 723 Tm (the clarity of this report. Team members inspected the generated material, retained) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 709 Tm (responsibility for modelling choices and claims, and validated the final folder structure) Tj ET
+BT /F1 10 Tf 1 0 0 1 50 695 Tm (and notebook syntax. AI was not treated as an experimental result or an independent author.) Tj ET
+BT /F1 8 Tf 0.35 g 1 0 0 1 278 25 Tm (10 / 10) Tj ET
+
+endstream
+endobj
+24 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 23 0 R >>
+endobj
+xref
+0 25
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000178 00000 n 
+0000000275 00000 n 
+0000000377 00000 n 
+0000001157 00000 n 
+0000001293 00000 n 
+0000002060 00000 n 
+0000002196 00000 n 
+0000003752 00000 n 
+0000003889 00000 n 
+0000005248 00000 n 
+0000005386 00000 n 
+0000007757 00000 n 
+0000007895 00000 n 
+0000009189 00000 n 
+0000009327 00000 n 
+0000015394 00000 n 
+0000015532 00000 n 
+0000017046 00000 n 
+0000017184 00000 n 
+0000018059 00000 n 
+0000018197 00000 n 
+0000019031 00000 n 
+trailer
+<< /Size 25 /Root 1 0 R >>
+startxref
+19169
+%%EOF

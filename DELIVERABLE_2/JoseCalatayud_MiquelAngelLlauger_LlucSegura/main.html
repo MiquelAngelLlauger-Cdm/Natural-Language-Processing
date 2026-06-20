@@ -1,0 +1,62 @@
+﻿<!doctype html><html><head><meta charset="utf-8"><title>NER Deliverable 2</title>
+<style>
+@page { size: A4; margin: 20mm; } body { font: 11pt Arial, sans-serif; color:#172033; line-height:1.45; }
+h1 { color:#17365d; font-size:24pt; } h2 { color:#24527a; border-bottom:1px solid #9fbad0; padding-bottom:4px; }
+h3 { color:#376b8f; } .cover { height:245mm; display:flex; flex-direction:column; justify-content:center; text-align:center; page-break-after:always; }
+.cover p { font-size:14pt; } .toc { page-break-after:always; } table { border-collapse:collapse; width:100%; margin:10px 0 18px; font-size:9.5pt; }
+th,td { border:1px solid #9aa8b4; padding:6px; text-align:left; } th { background:#dce8f2; }
+.note { background:#eef5fa; border-left:4px solid #376b8f; padding:9px; } code { font-family:Consolas,monospace; }
+</style></head><body>
+<section class="cover"><h1>Named Entity Recognition</h1><h2>Deliverable 2</h2>
+<p>Classic feature engineering and modern deep learning</p>
+<p><strong>Team members</strong><br>Jose Calatayud<br>Miquel &Agrave;ngel Llauger<br>Lluc Segura</p>
+<p>Natural Language Processing<br>Universitat de Barcelona<br>20 June 2026</p></section>
+<section class="toc"><h2>2. Table of contents</h2><ol>
+<li>Front page</li><li>Table of contents</li><li>Introduction</li><li>Exploratory data analysis</li>
+<li>Methodology</li><li>Experimental setup</li><li>Results</li><li>Conclusions</li>
+<li>Team member contributions</li><li>Use of AI</li></ol></section>
+
+<h2>3. Introduction</h2>
+<p>Named Entity Recognition (NER) assigns a semantic label to each token in a sentence, identifying people, locations, organisations, times and other entity types. It is a sequence-labelling problem used in information retrieval, search, question answering and knowledge extraction. This project compares the two approaches requested in the course guide: a classic conditional random field (CRF) based on handcrafted features and deep-learning systems that learn representations from data.</p>
+<p>The work follows a controlled progression. Three CRFs show the effect of increasingly rich morphology and context. A BiLSTM removes manual feature engineering but exposes overfitting, out-of-vocabulary (OOV) handling and independent tag decisions. GloVe embeddings address lexical coverage, a CRF output layer models sequence transitions, their combination addresses both issues, and DistilBERT adds contextual subword representations.</p>
+
+<h2>4. Exploratory data analysis</h2>
+<p>The supplied token-level CSV files contain approximately 38,366 training sentences and 38,367 test sentences, with roughly 840,000 tokens in each large split. The TINY TEST contains 13 deliberately ambiguous or misspelled sentences. Tokens are grouped by <code>sentence_id</code>; every token has a word and a BIO tag.</p>
+<p>There are 17 evaluation labels: <code>O</code> plus B/I variants for <code>geo</code>, <code>gpe</code>, <code>org</code>, <code>per</code>, <code>tim</code>, <code>art</code>, <code>eve</code> and <code>nat</code>. About 83% of tokens are <code>O</code>, so ordinary token accuracy would be misleading. Rare labels such as natural phenomena, events and artefacts occur only a few hundred times. Sentence-length inspection motivates a maximum sequence length of 60 for the recurrent models. The train/test vocabulary mismatch also motivates pretrained and subword representations.</p>
+
+<h2>5. Methodology</h2>
+<h3>5.1 Conditional random fields</h3>
+<p>Three linear-chain CRFs were implemented with <code>sklearn-crfsuite</code>. Version 1 uses lowercase, case, title-case and digit indicators. Version 2 adds prefixes, suffixes, word shape and one-token context. Version 3 adds multi-length affixes, normalised shape, orthographic flags and context within two tokens, with adjusted L1/L2 regularisation. A CRF scores an entire label sequence, so learned transitions encourage valid BIO patterns.</p>
+<h3>5.2 BiLSTM family</h3>
+<p>The baseline PyTorch BiLSTM learns word embeddings from scratch and encodes left and right context before token-wise classification. The BiLSTM-CRF replaces independent softmax decisions with learned transition scores and Viterbi decoding, using validation-based early stopping and weight decay. The GloVe variant initialises a 300-dimensional embedding table from <code>glove-wiki-gigaword-300</code>, uses case-aware lowercase fallback and extends the vocabulary for improved OOV coverage. The combined GloVe-BiLSTM-CRF incorporates both pretrained lexical knowledge and structured decoding.</p>
+<h3>5.3 DistilBERT</h3>
+<p><code>distilbert-base-cased</code> was fine-tuned for token classification. Word labels are aligned to WordPiece tokens: the first subtoken receives the word label and later subtokens are ignored in the loss with <code>-100</code>. Contextual embeddings can distinguish uses such as Apple the organisation from apples the fruit, while subwords reduce the impact of unseen spellings.</p>
+
+<h2>6. Experimental setup</h2>
+<p>Random seeds are fixed to 42. Neural variants use a 90/10 training/validation split, Adam optimisation, dropout, weight decay and early stopping. Typical recurrent settings are hidden size 128, maximum length 60, batch size 64 and learning rate 0.001. DistilBERT uses a cased checkpoint, learning rate around 3e-5 and GPU-oriented full training; CPU fallback deliberately uses fewer samples and epochs.</p>
+<p>Following the guide, the primary accuracy is computed only at positions whose gold tag is not <code>O</code>. Weighted token F1 excludes <code>O</code>, confusion matrices are produced for train and test, and the 13 TINY TEST predictions are printed as <code>word/tag</code> pairs together with non-O accuracy. The independent test split is never used to update parameters.</p>
+
+<h2>7. Results</h2>
+<table><tr><th>Model</th><th>Train non-O acc.</th><th>Test non-O acc.</th><th>Train weighted F1</th><th>Test weighted F1</th><th>Tiny acc.</th></tr>
+<tr><td>CRF v1</td><td>0.864</td><td>0.477</td><td>0.876</td><td>0.477</td><td>0.765</td></tr>
+<tr><td>CRF v2</td><td>0.931</td><td>0.705</td><td>0.934</td><td>0.727</td><td>0.882</td></tr>
+<tr><td><strong>CRF v3</strong></td><td>0.963</td><td><strong>0.732</strong></td><td>0.965</td><td><strong>0.753</strong></td><td>0.765</td></tr>
+<tr><td>BiLSTM</td><td>0.834</td><td>0.460</td><td>0.847</td><td>0.477</td><td>0.765</td></tr>
+<tr><td>DistilBERT (CPU fallback)</td><td>0.759</td><td>0.585</td><td>0.762</td><td>0.590</td><td>0.882</td></tr></table>
+<p>The strongest reported full test result is CRF v3 (weighted F1 0.753), and the increase from v1 to v3 demonstrates the value of feature engineering. CRF v2 and CPU-fallback DistilBERT obtain the best TINY TEST accuracy (0.882). The baseline BiLSTM generalises poorly compared with its training performance because learned embeddings collapse unseen words to <code>&lt;UNK&gt;</code> and tags are selected independently.</p>
+<p>The additional BiLSTM-CRF, BiLSTM-GloVe and combined GloVe-BiLSTM-CRF experiments are retained in the training notebook and fitted-model directory. Their notebook runs show that pretrained embeddings improve lexical coverage and CRF decoding improves BIO consistency, but results depend strongly on whether the CPU smoke-test or full GPU configuration is used. For that reason, the table reports only the directly comparable values captured by the central reproduction run and does not mix smoke-test figures with full-data figures.</p>
+<div class="note"><strong>Artifact note.</strong> The submitted DistilBERT directory contains configuration and tokenizer files but no model weight file. The preserved notebook outputs document its run, while fresh reproduction should skip it unless the weights are regenerated by <code>train_models.ipynb</code>. All supplied CRF and recurrent weight artifacts are included.</div>
+<p>Qualitatively, the TINY TEST exposes ambiguity and robustness limits: London can be a surname or location, Apple can be an organisation or a common noun, and misspellings such as Barchelona, Parris and Microsof test generalisation beyond memorisation. Contextual and subword models are well suited to these cases, while CRF morphology remains surprisingly competitive.</p>
+
+<h2>8. Conclusions</h2>
+<p>The experiments confirm that a carefully engineered CRF is a strong NER baseline. Richer local context and morphology produced the best comparable test score without requiring a GPU. Deep learning removes manual feature design, but a from-scratch BiLSTM needs explicit safeguards against OOV collapse, overfitting and invalid output transitions. GloVe and a CRF head target these weaknesses separately and combine naturally. DistilBERT offers the most expressive contextual representation, but its result here is limited by fallback training and incomplete exported weights.</p>
+<p>Future work should train all neural systems under one full-GPU protocol, retain every final checkpoint, tune CRF regularisation by validation search, report macro and entity-level F1 with <code>seqeval</code>, and analyse rare labels separately. These changes would improve both scientific comparability and reproducibility.</p>
+
+<h2>9. Team member contributions</h2>
+<p><strong>Jose Calatayud:</strong> implemented and documented the CRF progression, recurrent and Transformer experiments, fitted-model persistence, and consolidated reproduction workflow.</p>
+<p><strong>Miquel &Agrave;ngel Llauger:</strong> contributed delivery structure, shared utility design, reproducibility checks and review of the evaluation requirements.</p>
+<p><strong>Lluc Segura:</strong> contributed data/EDA review, report organisation, interpretation of results and final quality assurance.</p>
+
+<h2>10. Use of AI</h2>
+<p>Generative AI tools were used as development assistance for code review, debugging, documentation, restructuring notebooks to match the submission specification, and improving the clarity of this report. Team members inspected the generated material, retained responsibility for modelling choices and claims, and validated the final folder structure and notebook syntax. AI was not treated as an experimental result or an independent author.</p>
+</body></html>

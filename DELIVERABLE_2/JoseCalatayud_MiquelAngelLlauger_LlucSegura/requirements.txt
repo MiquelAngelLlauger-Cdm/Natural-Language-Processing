@@ -1,0 +1,11 @@
+pandas
+numpy
+scikit-learn
+sklearn-crfsuite
+matplotlib
+seaborn
+torch
+transformers
+datasets
+evaluate
+seqeval
