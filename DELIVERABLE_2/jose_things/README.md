@@ -34,6 +34,31 @@ BiLSTM en PyTorch entrenado **desde cero** (embeddings aprendidos de los datos, 
 features manuales). Auto-detecta `cuda/mps/cpu`. Guarda `bilstm_model.pth` +
 `dl_mappings.pkl`.
 
+Con entrenamiento largo en Colab sobreajusta (train F1 ≈ 0.99 vs test F1 ≈ 0.52): el
+test tiene palabras no vistas en train (OOV) y el modelo predice cada tag de forma
+independiente. Dos notebooks lo mejoran **sin salir del mundo RNN**:
+
+#### `03_1_BiLSTM_CRF.ipynb` — BiLSTM + capa CRF
+Añade una **CRF lineal** encima del BiLSTM: en vez de un softmax independiente por
+palabra, puntúa la **secuencia completa** y aprende **scores de transición** entre tags
+(penaliza saltos imposibles como `O → I-per`); en inferencia decodifica con **Viterbi**.
+Incluye **split de validación + early stopping** y weight decay contra el sobreajuste.
+Guarda `bilstm_crf_model.pth` + `bilstm_crf_mappings.pkl`.
+
+#### `03_2_BiLSTM_GloVe.ipynb` — BiLSTM + embeddings GloVe
+Reemplaza la tabla de embeddings aleatoria por **GloVe pre-entrenado**
+(`glove-wiki-gigaword-100`). Ataca el OOV de dos formas: (1) mejores vectores de partida
+para generalizar y (2) **extiende el vocabulario con el de GloVe**, de modo que una
+palabra de test no vista en train recibe su vector real en lugar de `<UNK>` (en el
+smoke-test, **99.5%** del vocabulario quedó inicializado desde GloVe). Lookup con case +
+fallback a minúsculas, early stopping. Guarda `bilstm_glove_model.pth` +
+`bilstm_glove_mappings.pkl`.
+
+> **Recomendado para el mejor resultado no-transformer:** combinar ambos — GloVe + BiLSTM
+> + CRF. Nota: los números locales de estos dos notebooks salen bajos porque corren en
+> modo CPU-rápido (subset + pocas épocas, aún convergiendo); su rendimiento real se ve al
+> re-ejecutarlos en **Colab GPU** (`FULL=True`, datos completos, 30 épocas).
+
 ### Paso 4 — `04_Model_DL_Transformer.ipynb` (DL #2)
 Fine-tuning de **DistilBERT** (`distilbert-base-cased`) para token classification, con
 alineación de etiquetas a sub-tokens (etiqueta en el primer sub-token, `-100` en el
